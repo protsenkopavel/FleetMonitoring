@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: DataGeneratorService
+  config:
+    import: optional:file:.env[.properties]
+server:
+  port: 8081
