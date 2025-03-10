@@ -5,7 +5,6 @@ import lombok.Getter;
 @Getter
 public class VehicleData {
 
-
     private double latitude;
     private double longitude;
     private double speed;
