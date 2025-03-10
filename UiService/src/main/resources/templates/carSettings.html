@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Настройки автомобилей</title>
+</head>
+
+<body>
+<h1>Настройки автомобилей</h1>
+
+<form th:action="@{/api/v1/ui/car-settings/}" th:object="${carSettings}" method="post">
+    <div>
+        <label>Количество машин (шт):</label>
+        <label><input type="number" th:field="*{carCount}"/></label>
+    </div>
+
+    <div>
+        <label>Максимальный радиус (км):</label>
+        <label><input type="number" step="0.1" th:field="*{maxRadius}"/></label>
+    </div>
+
+    <div>
+        <label>Порог топлива (л):</label>
+        <label><input type="number" step="0.1" th:field="*{fuelThreshold}"/></label>
+    </div>
+
+    <div>
+        <label>Порог давления в шинах (атм):</label>
+        <label><input type="number" step="0.1" th:field="*{tirePressureThreshold}"/></label>
+    </div>
+
+    <button type="submit">Сохранить</button>
+</form>
+</body>
+
+</html>
