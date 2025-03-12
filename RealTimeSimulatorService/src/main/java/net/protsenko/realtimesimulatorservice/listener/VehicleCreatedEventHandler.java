@@ -1,7 +1,10 @@
 package net.protsenko.realtimesimulatorservice.listener;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.protsenko.datageneratorservice.event.VehicleCreatedEvent;
+import net.protsenko.realtimesimulatorservice.entity.ProcessedEventEntity;
+import net.protsenko.realtimesimulatorservice.repository.ProcessedEventRepository;
 import org.springframework.kafka.annotation.KafkaHandler;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.KafkaHeaders;
@@ -12,8 +15,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 @KafkaListener(topics = "vehicle-created-events-topic", groupId = "vehicle-created-events")
 public class VehicleCreatedEventHandler {
+
+    private final ProcessedEventRepository processedEventRepository;
 
     @Transactional
     @KafkaHandler
@@ -23,5 +29,14 @@ public class VehicleCreatedEventHandler {
         log.info("Received event: {}", vehicleCreatedEvent.vehicleData().getClass());
         log.info("Message id: {}", messageId);
         log.info("Message key: {}", messageKey);
+
+        ProcessedEventEntity processedEventEntity = processedEventRepository.findByMessageId(messageId);
+
+        if (processedEventEntity != null) {
+            log.info("Duplicate messageId: {}", messageId);
+            return;
+        }
+
+        processedEventRepository.save(new ProcessedEventEntity(messageId, vehicleCreatedEvent.vehicleId()));
     }
 }
