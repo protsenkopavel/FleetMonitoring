@@ -1,8 +1,10 @@
 package net.protsenko.datageneratorservice.model;
 
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
+@ToString
 public class VehicleData {
 
     private double latitude;

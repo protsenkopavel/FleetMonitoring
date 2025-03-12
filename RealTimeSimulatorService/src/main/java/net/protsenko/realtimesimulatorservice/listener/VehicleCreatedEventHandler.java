@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.protsenko.datageneratorservice.event.VehicleCreatedEvent;
 import net.protsenko.realtimesimulatorservice.entity.ProcessedEventEntity;
 import net.protsenko.realtimesimulatorservice.repository.ProcessedEventRepository;
+import net.protsenko.realtimesimulatorservice.service.VehicleSimulator;
 import org.springframework.kafka.annotation.KafkaHandler;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.KafkaHeaders;
@@ -20,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class VehicleCreatedEventHandler {
 
     private final ProcessedEventRepository processedEventRepository;
+    private final VehicleSimulator vehicleSimulator;
 
     @Transactional
     @KafkaHandler
@@ -38,5 +40,7 @@ public class VehicleCreatedEventHandler {
         }
 
         processedEventRepository.save(new ProcessedEventEntity(messageId, vehicleCreatedEvent.vehicleId()));
+
+        vehicleSimulator.addVehicle(vehicleCreatedEvent.vehicleId(), vehicleCreatedEvent.vehicleData());
     }
 }
