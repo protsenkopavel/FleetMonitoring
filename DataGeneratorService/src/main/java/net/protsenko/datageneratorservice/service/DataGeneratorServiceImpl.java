@@ -19,7 +19,7 @@ public class DataGeneratorServiceImpl implements DataGeneratorService {
 
         for (int i = 0; i < carSettings.carCount(); i++) {
             VehicleData vehicle = new VehicleData();
-            vehicle.generateData();
+            vehicle.generateTelemetryData();
             vehicles.add(vehicle);
 
             producer.send(vehicle);

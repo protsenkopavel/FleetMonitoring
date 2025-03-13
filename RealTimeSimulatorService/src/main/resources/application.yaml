@@ -1,5 +1,5 @@
 server:
-  port: 8082
+  port: 8083
 
 spring:
   application:
@@ -12,6 +12,30 @@ spring:
       group-id: vehicle-simulator-group
     producer:
       bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      acks: all
+      retries: 10 # Количество повторных попыток отправки сообщения при неудаче.
+      properties:
+        retry:
+          backoff:
+            ms: 1000 # Задержка между попытками отправки сообщения.
+        delivery:
+          timeout:
+            ms: 60000 # Общее время ожидания успешной доставки сообщения.
+        linger:
+          ms: 0 # Время ожидания формирования пакета сообщений перед отправкой.
+        request:
+          timeout:
+            ms: 30000 # Максимальное время ожидания ответа на запрос отправки.
+        enable:
+          idempotence: true # Включение идемпотентной отправки для предотвращения дублирования сообщений.
+        max:
+          in:
+            flight:
+              requests:
+                per:
+                  connection: 5 # Максимальное количество неподтвержденных запросов на одно соединение.
   datasource:
     username: test
     password: test

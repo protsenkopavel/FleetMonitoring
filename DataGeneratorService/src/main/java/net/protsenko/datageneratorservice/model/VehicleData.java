@@ -18,16 +18,19 @@ public class VehicleData {
     private int doorStatus;
     private boolean airbagActivated;
 
-    public void generateData() {
+    public void generateTelemetryData() {
         this.latitude = generateLatitude();
         this.longitude = generateLongitude();
         this.speed = generateSpeed();
         this.fuelLevel = generateFuelLevel();
-        this.tirePressure = generateTirePressure();
         this.engineTemperature = generateEngineTemperature();
         this.mileage = generateMileage();
         this.engineRuntime = generateEngineRuntime();
         this.doorStatus = generateDoorStatus();
+    }
+
+    public void generateCriticalData() {
+        this.tirePressure = generateTirePressure();
         this.airbagActivated = generateAirbagData();
     }
 

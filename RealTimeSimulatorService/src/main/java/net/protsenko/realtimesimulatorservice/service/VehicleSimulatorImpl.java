@@ -1,5 +1,6 @@
 package net.protsenko.realtimesimulatorservice.service;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.protsenko.datageneratorservice.model.VehicleData;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -10,8 +11,10 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class VehicleSimulatorImpl implements VehicleSimulator {
 
+    private final RealTimeSimulatorProducer realTimeSimulatorProducer;
     private final Map<String, VehicleData> vehicles = new ConcurrentHashMap<>();
 
     public void addVehicle(String vehicleId, VehicleData vehicleData) {
@@ -22,11 +25,23 @@ public class VehicleSimulatorImpl implements VehicleSimulator {
         return vehicles.get(vehicleId);
     }
 
+    @Override
     @Scheduled(fixedRate = 1000)
-    public void updateVehicles() {
+    public void updateTelemetryVehiclesData() {
         vehicles.forEach((vehicleId, vehicleData) -> {
-            vehicleData.generateData();
-            log.info("Updated vehicleId {} data: {}", vehicleId, vehicleData.toString());
+            vehicleData.generateTelemetryData();
+            log.info("Updated vehicleId {} data: {}", vehicleId, vehicleData);
+            realTimeSimulatorProducer.sendTelemetry(vehicleId, vehicleData);
+        });
+    }
+
+    @Override
+    @Scheduled(fixedRate = 10000)
+    public void updateCriticalVehiclesData() {
+        vehicles.forEach((vehicleId, vehicleData) -> {
+            vehicleData.generateCriticalData();
+            log.info("Updated vehicleId {} data: {}", vehicleId, vehicleData);
+            realTimeSimulatorProducer.sendCriticalData(vehicleId, vehicleData);
         });
     }
 
