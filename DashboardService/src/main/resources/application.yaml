@@ -1,0 +1,12 @@
+server:
+  port: 8084
+
+spring:
+  application:
+    name: RealTimeSimulatorService
+  config:
+    import: optional:file:.env[.properties]
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: vehicle-simulator-group
