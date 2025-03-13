@@ -3,10 +3,11 @@ server:
 
 spring:
   application:
-    name: RealTimeSimulatorService
+    name: DashboardService
   config:
     import: optional:file:.env[.properties]
   kafka:
     consumer:
       bootstrap-servers: localhost:9092
-      group-id: vehicle-simulator-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
