@@ -16,3 +16,20 @@ services:
       - KAFKA_CFG_LOG_DIRS=/bitnami/kafka/data
     volumes:
       - ../kafka-data:/bitnami/kafka
+
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./DashboardService/prometheus/prometheus.yaml:/etc/prometheus/prometheus.yml
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - ../grafana-data:/var/lib/grafana
