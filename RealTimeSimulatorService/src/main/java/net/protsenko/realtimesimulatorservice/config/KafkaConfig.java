@@ -89,7 +89,7 @@ public class KafkaConfig {
                 .name("vehicle-telemetry-events-topic")
                 .partitions(1)
                 .replicas(1)
-                .configs(Map.of("min.insync.replicas", "1"))
+                .configs(Map.of("min.insync.replicas", "2"))
                 .build();
     }
 
@@ -99,7 +99,7 @@ public class KafkaConfig {
                 .name("critical-data-events-topic")
                 .partitions(1)
                 .replicas(1)
-                .configs(Map.of("min.insync.replicas", "1"))
+                .configs(Map.of("min.insync.replicas", "2"))
                 .build();
     }
 

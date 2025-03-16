@@ -53,7 +53,7 @@ public class KafkaConfig {
 
     @Bean
     KafkaTemplate<String, VehicleCreatedEvent> kafkaTemplate() {
-        return new KafkaTemplate<String, VehicleCreatedEvent>(producerFactory());
+        return new KafkaTemplate<>(producerFactory());
     }
 
     @Bean
@@ -62,7 +62,7 @@ public class KafkaConfig {
                 .name("vehicle-created-events-topic")
                 .partitions(1)
                 .replicas(1)
-                .configs(Map.of("min.insync.replicas", "1"))
+                .configs(Map.of("min.insync.replicas", "2"))
                 .build();
     }
 }

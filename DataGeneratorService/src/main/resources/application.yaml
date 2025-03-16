@@ -8,28 +8,28 @@ spring:
     import: optional:file:.env[.properties]
   kafka:
     producer:
-      bootstrap-servers: localhost:9092
+      bootstrap-servers: localhost:9092, localhost:9094
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       acks: all
-      retries: 10 # Количество повторных попыток отправки сообщения при неудаче.
+      retries: 10
       properties:
         retry:
           backoff:
-            ms: 1000 # Задержка между попытками отправки сообщения.
+            ms: 1000
         delivery:
           timeout:
-            ms: 60000 # Общее время ожидания успешной доставки сообщения.
+            ms: 60000
         linger:
-          ms: 0 # Время ожидания формирования пакета сообщений перед отправкой.
+          ms: 0
         request:
           timeout:
-            ms: 30000 # Максимальное время ожидания ответа на запрос отправки.
+            ms: 30000
         enable:
-          idempotence: true # Включение идемпотентной отправки для предотвращения дублирования сообщений.
+          idempotence: true
         max:
           in:
             flight:
               requests:
                 per:
-                  connection: 5 # Максимальное количество неподтвержденных запросов на одно соединение.
+                  connection: 5
