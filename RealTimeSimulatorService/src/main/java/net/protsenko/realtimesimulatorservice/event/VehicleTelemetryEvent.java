@@ -1,6 +1,7 @@
 package net.protsenko.realtimesimulatorservice.event;
 
 public record VehicleTelemetryEvent(
+        String id,
         double latitude,
         double longitude,
         double speed,

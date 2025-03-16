@@ -25,6 +25,7 @@ public class RealTimeSimulatorRealTimeSimulatorProducerImpl implements RealTimeS
     @Override
     public void sendTelemetry(String vehicleId, VehicleData vehicleData) {
         VehicleTelemetryEvent vehicleTelemetryEvent = new VehicleTelemetryEvent(
+                vehicleId,
                 vehicleData.getLatitude(),
                 vehicleData.getLongitude(),
                 vehicleData.getSpeed(),
