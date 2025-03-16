@@ -11,6 +11,14 @@ spring:
       bootstrap-servers: localhost:9092
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+    streams:
+      application-id: dashboard-streams
+      bootstrap-servers: localhost:9092
+      default:
+        key:
+          serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+        value:
+          serde: org.springframework.kafka.support.serializer.JsonSerde
 
 management:
   endpoints:

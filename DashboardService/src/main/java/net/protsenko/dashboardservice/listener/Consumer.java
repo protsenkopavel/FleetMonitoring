@@ -20,9 +20,9 @@ public class Consumer {
     public void consumeTelemetry(@Payload VehicleTelemetryEvent event,
                                  @Header("messageId") String messageId,
                                  @Header(KafkaHeaders.RECEIVED_KEY) String messageKey) {
-        log.info("Received event: {}", event);
-        log.info("Message id: {}", messageId);
-        log.info("Message key: {}", messageKey);
+//        log.info("Received event: {}", event);
+//        log.info("Message id: {}", messageId);
+//        log.info("Message key: {}", messageKey);
     }
 
     @KafkaListener(
@@ -32,9 +32,9 @@ public class Consumer {
     public void consumeCriticalData(@Payload CriticalDataEvent event,
                                     @Header("messageId") String messageId,
                                     @Header(KafkaHeaders.RECEIVED_KEY) String messageKey) {
-        log.info("Received event: {}", event);
-        log.info("Message id: {}", messageId);
-        log.info("Message key: {}", messageKey);
+//        log.info("Received event: {}", event);
+//        log.info("Message id: {}", messageId);
+//        log.info("Message key: {}", messageKey);
     }
 
 }
