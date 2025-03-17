@@ -1,6 +1,6 @@
 package net.protsenko.datageneratorservice.service;
 
-import net.protsenko.uiserivce.dto.CarSettings;
+import net.protsenko.core.dto.CarSettings;
 
 public interface DataGeneratorService {
 

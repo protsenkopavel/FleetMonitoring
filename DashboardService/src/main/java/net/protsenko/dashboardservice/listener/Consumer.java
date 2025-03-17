@@ -1,8 +1,8 @@
 package net.protsenko.dashboardservice.listener;
 
 import lombok.extern.slf4j.Slf4j;
-import net.protsenko.realtimesimulatorservice.event.CriticalDataEvent;
-import net.protsenko.realtimesimulatorservice.event.VehicleTelemetryEvent;
+import net.protsenko.core.event.CriticalDataEvent;
+import net.protsenko.core.event.VehicleTelemetryEvent;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.handler.annotation.Header;

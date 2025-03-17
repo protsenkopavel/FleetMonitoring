@@ -5,8 +5,8 @@ import io.micrometer.core.instrument.Tags;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.protsenko.core.event.VehicleTelemetryEvent;
 import net.protsenko.dashboardservice.entity.TelemetryMetrics;
-import net.protsenko.realtimesimulatorservice.event.VehicleTelemetryEvent;
 import org.apache.kafka.streams.kstream.KStream;
 import org.springframework.stereotype.Service;
 

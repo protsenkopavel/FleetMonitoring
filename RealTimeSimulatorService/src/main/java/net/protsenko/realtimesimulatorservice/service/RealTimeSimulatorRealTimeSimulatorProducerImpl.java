@@ -2,9 +2,9 @@ package net.protsenko.realtimesimulatorservice.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.protsenko.datageneratorservice.model.VehicleData;
-import net.protsenko.realtimesimulatorservice.event.CriticalDataEvent;
-import net.protsenko.realtimesimulatorservice.event.VehicleTelemetryEvent;
+import net.protsenko.core.model.VehicleData;
+import net.protsenko.core.event.CriticalDataEvent;
+import net.protsenko.core.event.VehicleTelemetryEvent;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;

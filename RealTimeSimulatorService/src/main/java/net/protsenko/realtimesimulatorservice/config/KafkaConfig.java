@@ -1,7 +1,7 @@
 package net.protsenko.realtimesimulatorservice.config;
 
-import net.protsenko.realtimesimulatorservice.event.CriticalDataEvent;
-import net.protsenko.realtimesimulatorservice.event.VehicleTelemetryEvent;
+import net.protsenko.core.event.CriticalDataEvent;
+import net.protsenko.core.event.VehicleTelemetryEvent;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;

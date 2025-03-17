@@ -2,8 +2,8 @@ package net.protsenko.datageneratorservice.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.protsenko.datageneratorservice.event.VehicleCreatedEvent;
-import net.protsenko.datageneratorservice.model.VehicleData;
+import net.protsenko.core.event.VehicleCreatedEvent;
+import net.protsenko.core.model.VehicleData;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;

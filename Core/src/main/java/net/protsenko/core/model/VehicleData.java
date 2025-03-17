@@ -1,4 +1,4 @@
-package net.protsenko.datageneratorservice.model;
+package net.protsenko.core.model;
 
 import lombok.Getter;
 import lombok.ToString;

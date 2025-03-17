@@ -1,4 +1,4 @@
-package net.protsenko.realtimesimulatorservice.event;
+package net.protsenko.core.event;
 
 public record CriticalDataEvent(
         double tirePressure,

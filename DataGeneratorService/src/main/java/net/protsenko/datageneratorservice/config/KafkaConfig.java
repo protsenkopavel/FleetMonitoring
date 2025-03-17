@@ -1,6 +1,6 @@
 package net.protsenko.datageneratorservice.config;
 
-import net.protsenko.datageneratorservice.event.VehicleCreatedEvent;
+import net.protsenko.core.event.VehicleCreatedEvent;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.springframework.beans.factory.annotation.Autowired;

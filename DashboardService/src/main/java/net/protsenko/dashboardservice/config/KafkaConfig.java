@@ -1,6 +1,6 @@
 package net.protsenko.dashboardservice.config;
 
-import net.protsenko.realtimesimulatorservice.event.VehicleTelemetryEvent;
+import net.protsenko.core.event.VehicleTelemetryEvent;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.Serde;
 import org.apache.kafka.common.serialization.Serdes;

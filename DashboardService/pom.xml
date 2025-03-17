@@ -66,14 +66,7 @@
 
         <dependency>
             <groupId>net.protsenko</groupId>
-            <artifactId>UiService</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>net.protsenko</groupId>
-            <artifactId>RealTimeSimulatorService</artifactId>
+            <artifactId>Core</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>

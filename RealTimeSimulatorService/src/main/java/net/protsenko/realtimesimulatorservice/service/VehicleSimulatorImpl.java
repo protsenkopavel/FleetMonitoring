@@ -2,7 +2,7 @@ package net.protsenko.realtimesimulatorservice.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.protsenko.datageneratorservice.model.VehicleData;
+import net.protsenko.core.model.VehicleData;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 

@@ -2,7 +2,7 @@ package net.protsenko.realtimesimulatorservice.listener;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.protsenko.datageneratorservice.event.VehicleCreatedEvent;
+import net.protsenko.core.event.VehicleCreatedEvent;
 import net.protsenko.realtimesimulatorservice.entity.ProcessedEventEntity;
 import net.protsenko.realtimesimulatorservice.repository.ProcessedEventRepository;
 import net.protsenko.realtimesimulatorservice.service.VehicleSimulator;

@@ -57,9 +57,10 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>net.protsenko</groupId>
-            <artifactId>DataGeneratorService</artifactId>
+            <artifactId>Core</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>

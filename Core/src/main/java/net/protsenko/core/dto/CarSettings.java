@@ -1,4 +1,4 @@
-package net.protsenko.uiserivce.dto;
+package net.protsenko.core.dto;
 
 public record CarSettings(
         int carCount,

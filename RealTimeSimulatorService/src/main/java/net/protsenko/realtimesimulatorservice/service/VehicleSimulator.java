@@ -1,6 +1,6 @@
 package net.protsenko.realtimesimulatorservice.service;
 
-import net.protsenko.datageneratorservice.model.VehicleData;
+import net.protsenko.core.model.VehicleData;
 
 public interface VehicleSimulator {
 

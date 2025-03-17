@@ -2,7 +2,7 @@ package net.protsenko.datageneratorservice.controller;
 
 import lombok.RequiredArgsConstructor;
 import net.protsenko.datageneratorservice.service.DataGeneratorService;
-import net.protsenko.uiserivce.dto.CarSettings;
+import net.protsenko.core.dto.CarSettings;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

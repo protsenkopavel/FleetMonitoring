@@ -1,6 +1,6 @@
 package net.protsenko.uiserivce.controller;
 
-import net.protsenko.uiserivce.dto.CarSettings;
+import net.protsenko.core.dto.CarSettings;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

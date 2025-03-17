@@ -1,8 +1,8 @@
 package net.protsenko.datageneratorservice.service;
 
 import lombok.RequiredArgsConstructor;
-import net.protsenko.datageneratorservice.model.VehicleData;
-import net.protsenko.uiserivce.dto.CarSettings;
+import net.protsenko.core.model.VehicleData;
+import net.protsenko.core.dto.CarSettings;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
