@@ -1,17 +1,14 @@
 server:
-  port: 8083
+  port: 8081
 
 spring:
   application:
-    name: RealTimeSimulatorService
+    name: DataGeneratorService
   config:
     import: optional:file:.env[.properties]
   kafka:
-    consumer:
-      bootstrap-servers: localhost:9092, localhost:9094
-      group-id: vehicle-simulator-group
     producer:
-      bootstrap-servers: localhost:9092, localhost:9094
+      bootstrap-servers: kafka-1:9092,kafka-2:9094
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       acks: all
@@ -36,10 +33,3 @@ spring:
               requests:
                 per:
                   connection: 5
-  datasource:
-    username: test
-    password: test
-    url: jdbc:h2:mem:testdb
-    driver-class-name: org.h2.Driver
-  jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
