@@ -8,10 +8,10 @@ spring:
     import: optional:file:.env[.properties]
   kafka:
     consumer:
-      bootstrap-servers: localhost:9092, localhost:9094
+      bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092,localhost:9094}
       group-id: vehicle-simulator-group
     producer:
-      bootstrap-servers: localhost:9092, localhost:9094
+      bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092,localhost:9094}
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       acks: all
