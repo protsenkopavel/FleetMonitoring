@@ -1,4 +1,68 @@
 services:
+  ui-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        JAR_FILE: ./UiService/target/*.jar
+    ports:
+      - "8080:8080"
+
+  data-generator-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        JAR_FILE: ./DataGeneratorService/target/*.jar
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      SPRING_KAFKA_PRODUCER_BOOTSTRAP_SERVERS: kafka-1:9092,kafka-2:9094
+    ports:
+      - "8081:8081"
+    depends_on:
+      - ui-service
+      - kafka-1
+      - kafka-2
+      - kafka-3
+
+  simulator-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        JAR_FILE: ./RealTimeSimulatorService/target/*.jar
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      SPRING_KAFKA_CONSUMER_BOOTSTRAP_SERVERS: kafka-1:9092,kafka-2:9094
+      SPRING_KAFKA_PRODUCER_BOOTSTRAP_SERVERS: kafka-1:9092,kafka-2:9094
+    ports:
+      - "8083:8083"
+    depends_on:
+      - data-generator-service
+      - kafka-1
+      - kafka-2
+      - kafka-3
+
+  dashboard-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        JAR_FILE: ./DashboardService/target/*.jar
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      SPRING_KAFKA_CONSUMER_BOOTSTRAP_SERVERS: kafka-1:9092,kafka-2:9094
+      SPRING_KAFKA_STREAMS_BOOTSTRAP_SERVERS: kafka-1:9092,kafka-2:9094
+    ports:
+      - "8084:8084"
+    depends_on:
+      - simulator-service
+      - kafka-1
+      - kafka-2
+      - kafka-3
+      - prometheus
+      - grafana
+
   kafka-1:
     image: bitnami/kafka:latest
     ports:
@@ -9,13 +73,13 @@ services:
       - KAFKA_CFG_PROCESS_ROLES=controller,broker
       - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@kafka-1:9091,2@kafka-2:9091,3@kafka-3:9091
       - KAFKA_CFG_LISTENERS=PLAINTEXT://:9090,CONTROLLER://:9091,EXTERNAL://:9092
-      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka-1:9090,EXTERNAL://localhost:9092
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka-1:9090,EXTERNAL://kafka-1:9092
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT,PLAINTEXT:PLAINTEXT
       - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
       - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=PLAINTEXT
       - KAFKA_CFG_LOG_DIRS=/bitnami/kafka/data
     volumes:
-      - ../kafka-data/kafka-1:/bitnami/kafka
+      - ../kafka-data-dev/kafka-1:/bitnami/kafka
 
   kafka-2:
     image: bitnami/kafka:latest
@@ -27,13 +91,13 @@ services:
       - KAFKA_CFG_PROCESS_ROLES=controller,broker
       - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@kafka-1:9091,2@kafka-2:9091,3@kafka-3:9091
       - KAFKA_CFG_LISTENERS=PLAINTEXT://:9090,CONTROLLER://:9091,EXTERNAL://:9094
-      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka-2:9090,EXTERNAL://localhost:9094
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka-2:9090,EXTERNAL://kafka-2:9094
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT,PLAINTEXT:PLAINTEXT
       - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
       - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=PLAINTEXT
       - KAFKA_CFG_LOG_DIRS=/bitnami/kafka/data
     volumes:
-      - ../kafka-data/kafka-2:/bitnami/kafka
+      - ../kafka-data-dev/kafka-2:/bitnami/kafka
 
   kafka-3:
     image: bitnami/kafka:latest
@@ -45,13 +109,25 @@ services:
       - KAFKA_CFG_PROCESS_ROLES=controller,broker
       - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=1@kafka-1:9091,2@kafka-2:9091,3@kafka-3:9091
       - KAFKA_CFG_LISTENERS=PLAINTEXT://:9090,CONTROLLER://:9091,EXTERNAL://:9096
-      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka-3:9090,EXTERNAL://localhost:9096
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka-3:9090,EXTERNAL://kafka-3:9096
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT,PLAINTEXT:PLAINTEXT
       - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
       - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=PLAINTEXT
       - KAFKA_CFG_LOG_DIRS=/bitnami/kafka/data
     volumes:
-      - ../kafka-data/kafka-3:/bitnami/kafka
+      - ../kafka-data-dev/kafka-3:/bitnami/kafka
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    ports:
+      - "8087:8080"
+    environment:
+      KAFKA_CLUSTERS_0_NAME: local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka-1:9092, kafka-2:9092, kafka-3:9092
+    depends_on:
+      - kafka-1
+      - kafka-2
+      - kafka-3
 
   prometheus:
     image: prom/prometheus:latest
