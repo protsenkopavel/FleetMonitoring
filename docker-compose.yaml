@@ -82,4 +82,5 @@ services:
     volumes:
       - ../grafana-data:/var/lib/grafana/data
       - ./DashboardService/grafana/dashboards:/var/lib/grafana/dashboards
-      - ./DashboardService/grafana/dashboard.yaml:/etc/grafana/provisioning/dashboards/default.yamloardService/grafana/dashboard.yaml:/etc/grafana/provisioning/dashboards/default.yaml
+      - ./DashboardService/grafana/dashboard.yaml:/etc/grafana/provisioning/dashboards/default.yaml
+      - ./DashboardService/grafana/datasource.yaml:/etc/grafana/provisioning/datasources/default.yaml

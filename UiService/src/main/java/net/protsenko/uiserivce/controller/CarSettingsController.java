@@ -27,7 +27,7 @@ public class CarSettingsController {
     public String updateCarSettings(@ModelAttribute CarSettings updatedSettings) {
         this.carSettings = updatedSettings;
 
-        String dataGeneratorUrl = "http://data-generator-service:8081/api/v1/data-generator/generate/";
+        String dataGeneratorUrl = "http://localhost:8081/api/v1/data-generator/generate/";
         restTemplate.postForLocation(dataGeneratorUrl, updatedSettings);
 
         return "redirect:/api/v1/ui/car-settings/";
