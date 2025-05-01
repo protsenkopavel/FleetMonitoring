@@ -1,13 +1,13 @@
-package net.protsenko.uiserivce;
+package net.protsenko.uiservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class UiSerivceApplication {
+public class UiServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(UiSerivceApplication.class, args);
+        SpringApplication.run(UiServiceApplication.class, args);
     }
 
 }

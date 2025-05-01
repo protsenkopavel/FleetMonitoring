@@ -5,3 +5,14 @@ spring:
     import: optional:file:.env[.properties]
 server:
   port: 8080
+
+data:
+  generator:
+    url: http://localhost:8081/api/v1/data-generator/generate/
+car:
+  settings:
+    default:
+      param1: 10
+      param2: 15.0
+      param3: 20.0
+      param4: 30.0
